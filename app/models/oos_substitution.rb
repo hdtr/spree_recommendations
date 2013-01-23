@@ -10,7 +10,7 @@ class OOSSubstitution < Substitution
             if behavior.searched_and_not_available?
                 category = category(behavior.product)
                 stacks[category] ||= []
-                stacks[category].pop if !stacks[category].empty?
+                stacks[category] = [] if !stacks[category].empty?
                 stacks[category] << behavior
             elsif behavior.purchase?
                 products_by_category = products_grouped_by_category(behavior.products)

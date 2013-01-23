@@ -1,0 +1,60 @@
+<%= stylesheet_link_tag "store/substitutions" %>
+<div class="cl"></div>
+<% if @recommendations_available %>
+    <div class="subtitutes_block cf">
+
+    <div class="subs_block_headertxt">You might be interested in</div>
+    <div class="subs_bg cf">
+        <% if @promotion %>
+            <ul class="cf">
+            <li>
+            <div class="subs_discount_wpr">
+            <div class="subs_discount">
+                <div class="subs_txt_discount">Discount</div>
+                <div class="subs_txt_discountval"><%= @discount %>% Off!  </div>
+            </div>
+            <div><%= link_to small_image(@promotion, :itemprop => "image"), @promotion, :itemprop => 'url' %></div>
+            <%= link_to truncate(@promotion.name, :length => 50), @promotion, :class => 'info', :itemprop => "name", :title => @promotion.name %>
+
+            </div>
+            </li>
+        </ul>
+        </div>
+    <% end %>
+
+        <div class="subtitutes_blockR">
+            <div class="subs_wpr cf">
+                <ul class="cf">
+                    <% @substitutes.each do |substitute|%>
+                        <li>
+                        <div><%= link_to small_image(substitute, :itemprop => "image"), substitute, :itemprop => 'url' %></div>
+                        <%= link_to truncate(substitute.name, :length => 50), substitute, :class => 'info', :itemprop => "name", :title => substitute.name %>
+                    </li>
+                <% end%>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+<% end%>
+<% if @similar_products %>
+    <div class="subtitutes_block cf">
+    <div class="subs_block_headertxt">Products similar to <i><%= @product.name %></i></div>
+    <div class="subs_bg cf">
+        <div class="subtitutes_blockR">
+            <div class="subs_wpr cf">
+                <ul class="cf">
+                    <% @similar_products.each do |product|%>
+                        <li><a href="javascript:void(0)">
+                        <div><%= image_tag(product.images.first.attachment.url(:small)) %></div>
+                        <span class="subs_productname"><%= product.name %></span>
+                    </a>
+                    </li>
+                <% end%>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>
